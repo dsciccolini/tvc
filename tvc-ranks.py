@@ -170,13 +170,6 @@ def fetch_and_display_validator_data():
                     return node.get("ipAddress", "Unknown")
             return "Unknown"
 
-        # Function to get vote pubkey from ranked_validators
-        def get_vote_pubkey(validator_identity):
-            for validator in ranked_validators:
-                if validator.get("identityPubkey") == validator_identity:
-                    return validator.get("voteAccountPubkey", "Unknown")
-            return "Unknown"
-
         # Function to get validator details from ranked_validators
         def get_validator_details(validator_identity):
             for validator in ranked_validators:
@@ -199,13 +192,13 @@ def fetch_and_display_validator_data():
         # Clear terminal screen before each refresh
         os.system('clear')
 
-        # Retrieve the special validator data
+        # Iterate over LIST_RANKS and print information for each validator
         for rank in LIST_RANKS:
             validator = next((v for v in ranked_validators if v["rank"] == rank), None)
-        
+
             if validator:
-                rank = validator["rank"]
-                validator_name = get_validator_name("identityPubkey")
+                validator_identity = validator["identityPubkey"]
+                validator_name = get_validator_name(validator_identity)
                 epoch_credits = validator["epochCredits"]
                 formatted_epoch_credits = f"{epoch_credits:,}"
                 missed_credits = epoch_credits_rank_1 - epoch_credits
@@ -213,21 +206,14 @@ def fetch_and_display_validator_data():
                 validator_details = get_validator_details(validator_identity)
                 ip_address = get_ip_address(validator_identity)
 
-                # Define max label width for alignment
-                LABEL_WIDTH = 18
-
-                # Message format with labels (properly aligned)
-
-                message = (
-                    f"\033[1;36m--------------- | Validator TVC Tracker | --------------- \033[0m\n\n"
-                    f"\033[1;96mRank: {rank} | Credits: {formatted_epoch_credits} | Missed Credits: {formatted_missed_credits}\033[1;32m{'Validator:'.ljust(LABEL_WIDTH)} {validator_name} {'| Identity Pubkey:'.ljust(LABEL_WIDTH)} {validator_identity} {'| IP Address:'.ljust(LABEL_WIDTH)} {ip_address} {'Stake:'.ljust(LABEL_WIDTH)} {validator_details['activatedStake']} {'Version:'.ljust(LABEL_WIDTH)} {validator_details['version']}\n"
-                    f"\n\nTimestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}" +
-                    f"\n\n\033[1;33mPress Ctrl+C to quit\033[0m"
+                # Print the information in the desired format
+                print(
+                    f"Rank {rank} | Credits {formatted_epoch_credits} | Missed Credits {formatted_missed_credits} | "
+                    f"Validator: {validator_name} | Identity: {validator_identity} | IP Address: {ip_address} | "
+                    f"Stake: {validator_details['activatedStake']} | Version: {validator_details['version']}"
                 )
-                print(message)
             else:
-                print(f"Validator {rank} not found in the current data.")
-                print(f"\n\033[1;33mPress Ctrl+C to quit\033[0m")
+                print(f"Validator with rank {rank} not found in the current data.")
 
     finally:
         # Always clean up temp files unless in debug mode
