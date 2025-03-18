@@ -221,11 +221,17 @@ def fetch_and_display_validator_data():
                 if len(validator_name) > 25:
                     validator_name = validator_name[:22] + '...'
 
+                # Highlight the user-provided validator
+                if identity_pubkey == validator_identity:
+                    color_code = "\033[1;33m"
+                else:
+                    color_code = "\033[1;36m"
+
                 print(
-                    f"\033[1;32mRank\033[0m {rank:<5} | \033[1;36mCredits:\033[0m {formatted_epoch_credits:<11} | \033[1;36mMissed:\033[0m {formatted_missed_credits:<9} | "
-                    f"\033[1;36mIP:\033[0m {ip_address:<16} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<17} | " 
-                    f"\033[1;36mv\033[0m{validator_details['version']:<13} | "
-                    f"\033[1;36mValidator:\033[0m {validator_name:<25} | \033[1;36mIdentity:\033[0m {identity_pubkey:<44}"
+                    f"{color_code}Rank\033[0m {rank:<5} | {color_code}Credits:\033[0m {formatted_epoch_credits:<11} | {color_code}Missed:\033[0m {formatted_missed_credits:<9} | "
+                    f"{color_code}IP:\033[0m {ip_address:<16} | {color_code}Stake:\033[0m {validator_details['activatedStake']:<17} | " 
+                    f"{color_code}v\033[0m{validator_details['version']:<13} | "
+                    f"{color_code}Validator:\033[0m {validator_name:<25} | {color_code}Identity:\033[0m {identity_pubkey:<44}"
                 )
             else:
                 print(f"Validator with rank {rank} not found in the current data.")
