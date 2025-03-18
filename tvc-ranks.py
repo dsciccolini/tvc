@@ -24,7 +24,7 @@ RPC_URLS = {
 # Define ranks to list
 LIST_RANKS = [1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 
               150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 
-              1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350]
+              1000, 1050, 1100, 1150, 1200, 1250, 1300]
 
 # Debug mode toggle
 DEBUG_MODE = False  # Set to False to automatically clean up files
@@ -208,9 +208,14 @@ def fetch_and_display_validator_data():
                 ip_address = get_ip_address(validator_identity)
 
                 # Print the information in the desired format
+                # Limit the length of the validator_name to 30 characters
+                if len(validator_name) > 30:
+                    validator_name = validator_name[:27] + '...'
+
                 print(
                     f"\033[1;36mRank {rank:<4}\033[0m | Credits: {formatted_epoch_credits:<10} | Missed: {formatted_missed_credits:<10} | "
-                    f"\033[1;36mIP:\033[0m {ip_address:<15} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<15} | \033[1;36mv\033[0m{validator_details['version']} | "
+                    f"\033[1;36mIP:\033[0m {ip_address:<15} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<15} | " 
+                    f"\033[1;36mv\033[0m{validator_details['version']:<15} | "
                     f"\033[1;36mValidator:\033[0m {validator_name:<30} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
                 )
             else:
