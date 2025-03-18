@@ -159,23 +159,23 @@ def fetch_and_display_validator_data():
         epoch_credits_rank_1 = ranked_validators[0]["epochCredits"] if ranked_validators else 0
 
         # Function to get validator name from identity pubkey
-        def get_validator_name(validator_identity):
+        def get_validator_name(identity_pubkey):
             for info in validator_info_data:
-                if info.get("identityPubkey") == validator_identity:
+                if info.get("identityPubkey") == identity_pubkey:
                     return info.get("info", {}).get("name", "Unknown")
             return "Unknown"
 
         # Function to get validator's IP address from gossip data
-        def get_ip_address(validator_identity):
+        def get_ip_address(identity_pubkey):
             for node in gossip_data:
-                if node.get("identityPubkey") == validator_identity:
+                if node.get("identityPubkey") == identity_pubkey:
                     return node.get("ipAddress", "Unknown")
             return "Unknown"
 
         # Function to get validator details from ranked_validators
-        def get_validator_details(validator_identity):
+        def get_validator_details(identity_pubkey):
             for validator in ranked_validators:
-                if validator.get("identityPubkey") == validator_identity:
+                if validator.get("identityPubkey") == identity_pubkey:
                     return {
                         "activatedStake": f"{int(validator.get('activatedStake', 0)) / 1_000_000_000:,.2f} ◎",
                         "version": validator.get("version", "Unknown"),
@@ -207,14 +207,14 @@ def fetch_and_display_validator_data():
             validator = next((v for v in ranked_validators if v["rank"] == rank), None)
 
             if validator:
-                validator_identity = validator["identityPubkey"]
-                validator_name = get_validator_name(validator_identity)
+                identity_pubkey = validator["identityPubkey"]
+                validator_name = get_validator_name(identity_pubkey)
                 epoch_credits = validator["epochCredits"]
                 formatted_epoch_credits = f"{epoch_credits:,}"
                 missed_credits = epoch_credits_rank_1 - epoch_credits
                 formatted_missed_credits = f"{missed_credits:,}"
-                validator_details = get_validator_details(validator_identity)
-                ip_address = get_ip_address(validator_identity)
+                validator_details = get_validator_details(identity_pubkey)
+                ip_address = get_ip_address(identity_pubkey)
 
                 # Print the information in the desired format
                 # Limit the length of the validator_name to 30 characters
@@ -225,7 +225,7 @@ def fetch_and_display_validator_data():
                     f"\033[1;32mRank\033[0m {rank:<5} | \033[1;36mCredits:\033[0m {formatted_epoch_credits:<11} | \033[1;36mMissed:\033[0m {formatted_missed_credits:<9} | "
                     f"\033[1;36mIP:\033[0m {ip_address:<16} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<17} | " 
                     f"\033[1;36mv\033[0m{validator_details['version']:<13} | "
-                    f"\033[1;36mValidator:\033[0m {validator_name:<25} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
+                    f"\033[1;36mValidator:\033[0m {validator_name:<25} | \033[1;36mIdentity:\033[0m {identity_pubkey:<44}"
                 )
             else:
                 print(f"Validator with rank {rank} not found in the current data.")
