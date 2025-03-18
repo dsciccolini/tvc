@@ -214,12 +214,12 @@ def fetch_and_display_validator_data():
                 ip_address = get_ip_address(validator_identity)
 
                 # Calculate the distance to specific ranks
-                distances = []
-                for list_rank in LIST_RANKS:
-                    list_rank = next((v for v in ranked_validators if v["rank"] == list_rank), None)
-                    if list_rank:
-                        diff = list_rank["epochCredits"] - epoch_credits
-                        distances.append(f"Rank {list_rank}: {diff} credits")
+#                distances = []
+#                for list_rank in LIST_RANKS:
+#                    list_rank = next((v for v in ranked_validators if v["rank"] == list_rank), None)
+#                    if list_rank:
+#                        diff = list_rank["epochCredits"] - epoch_credits
+#                        distances.append(f"Rank {list_rank}: {diff} credits")
 
                 # Define max label width for alignment
                 LABEL_WIDTH = 18
@@ -238,7 +238,6 @@ def fetch_and_display_validator_data():
                     f"{'Version:'.ljust(LABEL_WIDTH)} {validator_details['version']}\n"
                     f"{'Skip Rate:'.ljust(LABEL_WIDTH)} {validator_details['skipRate']}\033[0m\n\n"
                     f"\033[1;96mRank: {rank} | Credits: {formatted_epoch_credits} | Missed Credits: {formatted_missed_credits}\033[0m\n\n"
-                    "Vote Credit Differences:\n" + "\n".join(distances) +
                     f"\n\nTimestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}" +
                     f"\n\n\033[1;33mPress Ctrl+C to quit\033[0m"
                 )
