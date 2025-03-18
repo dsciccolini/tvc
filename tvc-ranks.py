@@ -191,7 +191,7 @@ def fetch_and_display_validator_data():
         os.system('clear')
 
         print(
-            f"\033[1;36m--------------- | Validator TVC Tracker | --------------- \033[0m\n\n"
+            f"\033[1;32m------------------------- | Validator TVC Tracker | ------------------------- \033[0m\n\n"
         )
         # Iterate over LIST_RANKS and print information for each validator
         for rank in LIST_RANKS:
@@ -213,7 +213,7 @@ def fetch_and_display_validator_data():
                     validator_name = validator_name[:22] + '...'
 
                 print(
-                    f"\033[1;96mRank {rank:<5}\033[0m | \033[1;36mCredits:\033[0m {formatted_epoch_credits:<11} | \033[1;36mMissed:\033[0m {formatted_missed_credits:<9} | "
+                    f"\033[1;32mRank\033[0 {rank:<5} | \033[1;36mCredits:\033[0m {formatted_epoch_credits:<11} | \033[1;36mMissed:\033[0m {formatted_missed_credits:<9} | "
                     f"\033[1;36mIP:\033[0m {ip_address:<16} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<17} | " 
                     f"\033[1;36mv\033[0m{validator_details['version']:<13} | "
                     f"\033[1;36mValidator:\033[0m {validator_name:<25} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
