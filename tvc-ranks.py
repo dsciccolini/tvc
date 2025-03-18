@@ -215,11 +215,11 @@ def fetch_and_display_validator_data():
 
                 # Calculate the distance to specific ranks
                 distances = []
-                for compare_rank in COMPARE_RANKS:
-                    compare_validator = next((v for v in ranked_validators if v["rank"] == compare_rank), None)
-                    if compare_validator:
-                        diff = compare_validator["epochCredits"] - epoch_credits
-                        distances.append(f"Rank {compare_rank}: {diff} credits")
+                for list_rank in LIST_RANKS:
+                    list_rank = next((v for v in ranked_validators if v["rank"] == list_rank), None)
+                    if list_rank:
+                        diff = list_rank["epochCredits"] - epoch_credits
+                        distances.append(f"Rank {list_rank}: {diff} credits")
 
                 # Define max label width for alignment
                 LABEL_WIDTH = 18
@@ -247,23 +247,23 @@ def fetch_and_display_validator_data():
                 print(f"Validator {rank} not found in the current data.")
                 print(f"\n\033[1;33mPress Ctrl+C to quit\033[0m")
 
-        finally:
-            # Always clean up temp files unless in debug mode
-            if not DEBUG_MODE:
-                for file_path in temp_files:
-                    try:
-                        if os.path.exists(file_path):
-                            os.remove(file_path)
-                    except Exception as e:
-                        print(f"\033[1;31mError removing temporary file {file_path}: {e}\033[0m")
-            else:
-                # Debug Mode: Keep temporary files
-                print("\n\033[1;33mDebug Mode: Temporary files retained for inspection\033[0m")
-                print(f"Validators File: {validators_file.name}")
-                print(f"Sorted File: {sorted_file.name}")
-                print(f"Ranked File: {ranked_file.name}")
-                print(f"Validator Info File: {validator_info_file.name}")
-                print(f"Gossip File: {gossip_file.name}")
+    finally:
+        # Always clean up temp files unless in debug mode
+        if not DEBUG_MODE:
+            for file_path in temp_files:
+                try:
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
+                except Exception as e:
+                    print(f"\033[1;31mError removing temporary file {file_path}: {e}\033[0m")
+        else:
+            # Debug Mode: Keep temporary files
+            print("\n\033[1;33mDebug Mode: Temporary files retained for inspection\033[0m")
+            print(f"Validators File: {validators_file.name}")
+            print(f"Sorted File: {sorted_file.name}")
+            print(f"Ranked File: {ranked_file.name}")
+            print(f"Validator Info File: {validator_info_file.name}")
+            print(f"Gossip File: {gossip_file.name}")
 
 # Main program
 print("\033[1;33mStarting Validator TVC Tracker... Press Ctrl+C to quit.\033[0m")
