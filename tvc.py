@@ -239,7 +239,7 @@ def fetch_and_display_validator_data():
                 f"\033[1;96mRank: {rank} | Credits: {formatted_epoch_credits} | Missed Credits: {formatted_missed_credits}\033[0m\n\n"
                 "Vote Credit Differences:\n" + "\n".join(distances) +
                 f"\n\nTimestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}" +
-                f"\n\n\033[1;33mPress Ctrl+C to quit TEST test TEST test\033[0m"
+                f"\n\n\033[1;33mPress Ctrl+C to quit\033[0m"
             )
             print(message)
         else:
