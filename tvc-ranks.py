@@ -22,7 +22,9 @@ RPC_URLS = {
 }
 
 # Define ranks to list
-LIST_RANKS = [1, 25, 50, 75, 100, 200, 250, 300, 350, 400, 450, 500, 750, 1000]
+LIST_RANKS = [1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 
+              150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 
+              1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350]
 
 # Debug mode toggle
 DEBUG_MODE = False  # Set to False to automatically clean up files
@@ -217,7 +219,7 @@ def fetch_and_display_validator_data():
             f"\n\nTimestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}" +
             f"\n\n\033[1;33mPress Ctrl+C to quit\033[0m"
         )
-        
+
     finally:
         # Always clean up temp files unless in debug mode
         if not DEBUG_MODE:
