@@ -222,7 +222,7 @@ def fetch_and_display_validator_data():
                     validator_name = validator_name[:22] + '...'
 
                 if identity_pubkey == validator_identity:
-                    color_code = "\033[1;33m"
+                    color_code = "\033[1;32m"
                     reset_code = "\033[0m"
                     print(
                         f"{color_code}Rank {rank:<5} | Credits: {formatted_epoch_credits:<11} | Missed: {formatted_missed_credits:<9} | "
