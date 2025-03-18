@@ -22,7 +22,7 @@ RPC_URLS = {
 }
 
 # Define ranks to list
-LIST_RANKS = [1, 5, 10, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300]
+LIST_RANKS = [1, 100, 250, 500, 1000]
 
 # Debug mode toggle
 DEBUG_MODE = False  # Set to False to automatically clean up files
@@ -213,14 +213,6 @@ def fetch_and_display_validator_data():
                 validator_details = get_validator_details(validator_identity)
                 ip_address = get_ip_address(validator_identity)
 
-                # Calculate the distance to specific ranks
-#                distances = []
-#                for list_rank in LIST_RANKS:
-#                    list_rank = next((v for v in ranked_validators if v["rank"] == list_rank), None)
-#                    if list_rank:
-#                        diff = list_rank["epochCredits"] - epoch_credits
-#                        distances.append(f"Rank {list_rank}: {diff} credits")
-
                 # Define max label width for alignment
                 LABEL_WIDTH = 18
 
@@ -228,16 +220,7 @@ def fetch_and_display_validator_data():
 
                 message = (
                     f"\033[1;36m--------------- | Validator TVC Tracker | --------------- \033[0m\n\n"
-                    f"\033[1;32m{'Validator Name:'.ljust(LABEL_WIDTH)} {validator_name}\n"
-                    f"{'Identity Pubkey:'.ljust(LABEL_WIDTH)} {validator_identity}\n"
-                    f"{'Vote Pubkey:'.ljust(LABEL_WIDTH)} {validator.get('voteAccountPubkey', 'Unknown')}\n"
-                    f"{'IP Address:'.ljust(LABEL_WIDTH)} {ip_address}\n"
-                    f"{'Last Vote:'.ljust(LABEL_WIDTH)} {validator_details['lastVote']}\n"
-                    f"{'Root Slot:'.ljust(LABEL_WIDTH)} {validator_details['rootSlot']}\n"
-                    f"{'Activated Stake:'.ljust(LABEL_WIDTH)} {validator_details['activatedStake']}\n"
-                    f"{'Version:'.ljust(LABEL_WIDTH)} {validator_details['version']}\n"
-                    f"{'Skip Rate:'.ljust(LABEL_WIDTH)} {validator_details['skipRate']}\033[0m\n\n"
-                    f"\033[1;96mRank: {rank} | Credits: {formatted_epoch_credits} | Missed Credits: {formatted_missed_credits}\033[0m\n\n"
+                    f"\033[1;96mRank: {rank} | Credits: {formatted_epoch_credits} | Missed Credits: {formatted_missed_credits}\033[1;32m{'Validator:'.ljust(LABEL_WIDTH)} {validator_name} {'| Identity Pubkey:'.ljust(LABEL_WIDTH)} {validator_identity} {'| IP Address:'.ljust(LABEL_WIDTH)} {ip_address} {'Stake:'.ljust(LABEL_WIDTH)} {validator_details['activatedStake']} {'Version:'.ljust(LABEL_WIDTH)} {validator_details['version']}\n"
                     f"\n\nTimestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}" +
                     f"\n\n\033[1;33mPress Ctrl+C to quit\033[0m"
                 )
