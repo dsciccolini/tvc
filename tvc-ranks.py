@@ -22,7 +22,7 @@ RPC_URLS = {
 }
 
 # Define ranks to list
-LIST_RANKS = [1, 100, 250, 500, 1000]
+LIST_RANKS = [1, 25, 50, 75, 100, 200, 250, 300, 350, 400, 450, 500, 750, 1000]
 
 # Debug mode toggle
 DEBUG_MODE = False  # Set to False to automatically clean up files
@@ -175,15 +175,11 @@ def fetch_and_display_validator_data():
             for validator in ranked_validators:
                 if validator.get("identityPubkey") == validator_identity:
                     return {
-                        "lastVote": validator.get("lastVote", "Unknown"),
-                        "rootSlot": validator.get("rootSlot", "Unknown"),
-                        "activatedStake": f"{int(validator.get('activatedStake', 0)) / 1_000_000_000:,.2f}◎",
+                        "activatedStake": f"{int(validator.get('activatedStake', 0)) / 1_000_000_000:,.2f} ◎",
                         "version": validator.get("version", "Unknown"),
                         "skipRate": validator.get("skipRate", "Unknown")
                     }
             return {
-                "lastVote": "Unknown",
-                "rootSlot": "Unknown",
                 "activatedStake": "Unknown",
                 "version": "Unknown",
                 "skipRate": "Unknown"
@@ -208,9 +204,9 @@ def fetch_and_display_validator_data():
 
                 # Print the information in the desired format
                 print(
-                    f"Rank {rank} | Credits {formatted_epoch_credits} | Missed Credits {formatted_missed_credits} | "
-                    f"Validator: {validator_name} | Identity: {validator_identity} | IP Address: {ip_address} | "
-                    f"Stake: {validator_details['activatedStake']} | Version: {validator_details['version']}"
+                    f"Rank {rank} | Credits: {formatted_epoch_credits} | Missed: {formatted_missed_credits} | "
+                    f"Validator: {validator_name} | Identity: {validator_identity} | IP: {ip_address} | "
+                    f"Stake: {validator_details['activatedStake']} | v{validator_details['version']}"
                 )
             else:
                 print(f"Validator with rank {rank} not found in the current data.")
