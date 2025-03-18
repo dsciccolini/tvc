@@ -193,6 +193,15 @@ def fetch_and_display_validator_data():
         print(
             f"\033[1;32m------------------------- | Validator TVC Tracker | ------------------------- \033[0m\n"
         )
+
+        # Ensure the user-provided validator_identity is included
+        user_validator = next((v for v in ranked_validators if v["identityPubkey"] == validator_identity), None)
+        if user_validator:
+            user_validator_rank = user_validator["rank"]
+            if user_validator_rank not in LIST_RANKS:
+                LIST_RANKS.append(user_validator_rank)
+                LIST_RANKS.sort()
+
         # Iterate over LIST_RANKS and print information for each validator
         for rank in LIST_RANKS:
             validator = next((v for v in ranked_validators if v["rank"] == rank), None)
