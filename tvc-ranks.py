@@ -204,9 +204,16 @@ def fetch_and_display_validator_data():
 
                 # Print the information in the desired format
                 print(
+                    f"\033[1;36m--------------- | Validator TVC Tracker | --------------- \033[0m\n\n"
+                )
+                print(
                     f"\033[1;36mRank {rank:<4}\033[0m | Credits: {formatted_epoch_credits:<10} | Missed: {formatted_missed_credits:<10} | "
                     f"\033[1;36mIP:\033[0m {ip_address:<15} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<15} | \033[1;36mv\033[0m{validator_details['version']} | "
                     f"\033[1;36mValidator:\033[0m {validator_name:<30} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
+                )
+                print(
+                    f"\n\nTimestamp: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}" +
+                    f"\n\n\033[1;33mPress Ctrl+C to quit\033[0m"
                 )
             else:
                 print(f"Validator with rank {rank} not found in the current data.")
