@@ -213,10 +213,10 @@ def fetch_and_display_validator_data():
                     validator_name = validator_name[:27] + '...'
 
                 print(
-                    f"\033[1;36mRank {rank:<4}\033[0m | Credits: {formatted_epoch_credits:<10} | Missed: {formatted_missed_credits:<10} | "
-                    f"\033[1;36mIP:\033[0m {ip_address:<15} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<15} | " 
-                    f"\033[1;36mv\033[0m{validator_details['version']:<15} | "
-                    f"\033[1;36mValidator:\033[0m {validator_name:<30} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
+                    f"\033[1;36mRank {rank:<5}\033[0m | Credits: {formatted_epoch_credits:<11} | Missed: {formatted_missed_credits:<9} | "
+                    f"\033[1;36mIP:\033[0m {ip_address:<16} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<17} | " 
+                    f"\033[1;36mv\033[0m{validator_details['version']:<13} | "
+                    f"\033[1;36mValidator:\033[0m {validator_name:<32} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
                 )
             else:
                 print(f"Validator with rank {rank} not found in the current data.")
