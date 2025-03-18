@@ -209,14 +209,14 @@ def fetch_and_display_validator_data():
 
                 # Print the information in the desired format
                 # Limit the length of the validator_name to 30 characters
-                if len(validator_name) > 30:
-                    validator_name = validator_name[:27] + '...'
+                if len(validator_name) > 20:
+                    validator_name = validator_name[:17] + '...'
 
                 print(
-                    f"\033[1;36mRank {rank:<5}\033[0m | Credits: {formatted_epoch_credits:<11} | Missed: {formatted_missed_credits:<9} | "
+                    f"\033[1;36mRank {rank:<5}\033[0m | \033[1;36mCredits:\033[0m {formatted_epoch_credits:<11} | \033[1;36mMissed:\033[0m {formatted_missed_credits:<9} | "
                     f"\033[1;36mIP:\033[0m {ip_address:<16} | \033[1;36mStake:\033[0m {validator_details['activatedStake']:<17} | " 
                     f"\033[1;36mv\033[0m{validator_details['version']:<13} | "
-                    f"\033[1;36mValidator:\033[0m {validator_name:<32} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
+                    f"\033[1;36mValidator:\033[0m {validator_name:<20} | \033[1;36mIdentity:\033[0m {validator_identity:<44}"
                 )
             else:
                 print(f"Validator with rank {rank} not found in the current data.")
